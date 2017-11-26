@@ -7,12 +7,12 @@ class StepCount
         step_count = 0;
     }
 
-    protected int get_steps()
+    protected int getSteps()
     {
         return step_count;
     }
 
-    protected void set_steps(int new_steps)
+    protected void setSteps(int new_steps)
     {
         step_count = new_steps;
     }

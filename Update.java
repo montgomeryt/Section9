@@ -28,6 +28,6 @@ public class Update implements Command
 
     protected void new_steps(int steps)
     {
-        this.steps.set_steps(steps);
+        this.steps.setSteps(steps);
     }
 }

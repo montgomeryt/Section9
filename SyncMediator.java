@@ -12,7 +12,7 @@ public class SyncMediator implements Mediator
 
     public void update_steps(StepCount s, Sync sync)
     {
-        this.steps = s.get_steps();
+        this.steps = s.getSteps();
         sync.set_steps(this.steps);
     }
 }
