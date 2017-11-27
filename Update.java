@@ -1,33 +1,30 @@
+/**
+ * @author Tyler Montgomery
+ */
+
 public class Update implements Command
 {
-    private Mediator med;
-    private Sync syn;
+    private Mediator med = new SyncMediator();
+    private Sync syn = new Sync();
     private HeartRate hr;
     private StepCount steps;
 
-    public Update(Mediator med, Sync syn, HeartRate hr, StepCount steps)
+    public Update(HeartRate hr, StepCount steps)
     {
-        this.med = med;
-        this.syn = syn;
         this.hr = hr;
         this.steps = steps;
     }
 
     public void execute()
     {
-        med.update_hr(hr, syn);
+        steps.incSteps();
+        hr.set_hr_rand();
+
         med.update_steps(steps, syn);
-        syn.send_hr();
-        syn.send_steps();
-    }
+        med.update_hr(hr, syn);
 
-    protected void new_hr(int hr)
-    {
-        this.hr.set_hr(hr);
-    }
-
-    protected void new_steps(int steps)
-    {
-        this.steps.set_steps(steps);
+        // Demonstrates that Sync is updating the hr and steps
+        //syn.send_hr();
+        //syn.send_steps();
     }
 }

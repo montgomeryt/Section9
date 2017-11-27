@@ -1,3 +1,7 @@
+/**
+ * @author Tyler Montgomery
+ */
+
 public interface Mediator
 {
     void update_hr(HeartRate u, Sync sync);

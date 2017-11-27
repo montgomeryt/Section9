@@ -1,4 +1,7 @@
 /**
+ * @author Nicholas Foster
+ * @modified Tyler Montgomery, Dylan Cowden
+ *
  * Clock class
  * Keeps track of time and displays it on the HomeScreen
  * Contains UI which allows the user to update the time
@@ -11,10 +14,13 @@ import java.awt.event.*;
 
 public class Clock implements ActionListener {
     private static Timer timer;
+    private static int numSeconds = 0;
     private static int numMinutes = 0;
     private static int newMinutes;
     private static int newHours;
-    final static JLabel label = new JLabel("00:00");
+    private static String sTime = "00:00:00";
+    final static JLabel label = new JLabel("00:00:00");
+    final static JLabel labeltmp = new JLabel("00:00:00");
 
 
     /**
@@ -22,14 +28,21 @@ public class Clock implements ActionListener {
      * @return String time
      */
     public static String getTime(){
-        int hours = numMinutes / 60;
-        int minutes = numMinutes % 60;
-        String time = String.format("%02d:%02d", hours, minutes);
-        return time;
+        /*int hours = numSeconds / 60 / 60;
+        int minutes = numSeconds /60 % 60;
+        int seconds = numSeconds % 60;
+        String time = String.format("%02d:%02d:%02d", hours, minutes, seconds);*/
+        return sTime;
+    }
+    
+    //added by dylan
+    public int getRawTime() {
+    	return numMinutes;
     }
 
     public Component createComponents() {
         //Create buttons
+    	labeltmp.setText(sTime);
         JButton addMinute = new JButton("+Minute");
         addMinute.addActionListener(this);
         addMinute.setActionCommand("am");
@@ -50,7 +63,7 @@ public class Clock implements ActionListener {
         JPanel pane = new JPanel(new GridLayout(0, 1));
         pane.add(addHour);
         pane.add(subHour);
-        pane.add(label);
+        pane.add(labeltmp);
         pane.add(addMinute);
         pane.add(subMinute);
         pane.add(enter);
@@ -73,29 +86,34 @@ public class Clock implements ActionListener {
             newMinutes++;
             if (newMinutes >= 60)
                 newMinutes = 0;
-            time = String.format("%02d:%02d", newHours, newMinutes);
-            label.setText(time);
+            time = String.format("%02d:%02d:%02d", newHours, newMinutes, numSeconds%60);
+            labeltmp.setText(time);
         } else if ("sm".equals(e.getActionCommand())) {  //Subtract a minute
             newMinutes--;
             if (newMinutes <= -1)
                 newMinutes = 59;
-            time = String.format("%02d:%02d", newHours, newMinutes);
-            label.setText(time);
+            time = String.format("%02d:%02d:%02d", newHours, newMinutes, numSeconds%60);
+            labeltmp.setText(time);
         } else if ("ah".equals(e.getActionCommand())) { //Add a hour
             newHours++;
             if (newHours >= 24)
                 newHours = 0;
-            time = String.format("%02d:%02d", newHours, newMinutes);
-            label.setText(time);
+            time = String.format("%02d:%02d:%02d", newHours, newMinutes, numSeconds%60);
+            labeltmp.setText(time);
         } else if ("sh".equals(e.getActionCommand())) { //Subtract a hour
             newHours--;
             if (newHours <= -1)
                 newHours = 23;
-            time = String.format("%02d:%02d", newHours, newMinutes);
-            label.setText(time);
+            time = String.format("%02d:%02d:%02d", newHours, newMinutes, numSeconds%60);
+            labeltmp.setText(time);
         } else if ("enter".equals(e.getActionCommand())) { //Submit changes, update numMinutes, and restart timer
             numMinutes = 60*newHours + newMinutes;
+            numSeconds = numMinutes * 60;
+            
             timer.restart();
+            sTime =  String.format("%02d:%02d:%02d",
+                				  numMinutes/60, numMinutes%60, numSeconds%60);
+            label.setText(sTime);
             Driver.resetWindow();
         }
     }
@@ -110,15 +128,31 @@ public class Clock implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent event)
             {
-                numMinutes++;
+                numSeconds++;
+                //timeS++;
                 //Clock reaches 23:59 and resets to simulate a new day
-                if (numMinutes == 1440)
-                    numMinutes = 0;
+                if (numSeconds == 86400)
+                    numSeconds = 0;
+                if (numSeconds%60 == 0) {
+                	numMinutes++;// = numSeconds/60%60;
+                }
+                sTime = String.format("%02d:%02d:%02d",
+                					  numMinutes/60, numMinutes%60, numSeconds%60);
+                label.setText(sTime);
             }
         };
         //Timer set to act every minute
-        timer = new Timer(60000, action);
-        timer.setInitialDelay(60000);
+        timer = new Timer(1000, action);
+        timer.setInitialDelay(0);
         timer.start();
     }
+    
+    static void startTime() {
+    	timer.start();
+    }
+    
+    static void stopTime() {
+    	timer.stop();
+    }
+    
 }
