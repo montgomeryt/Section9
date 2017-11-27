@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 public class Driver implements ActionListener
 {
 	//Dylan
-	private static Timer timer;static int z;
+	private static Timer timer;
 	
     private static JFrame frame = new JFrame("PepStep");
     private static JLabel time = new JLabel();
@@ -37,6 +37,12 @@ public class Driver implements ActionListener
             StopWatch.createAndShowGUI();
             frame.getContentPane().add(stopWatch.createComponents());
         }
+        else if ("resetSteps".equals(e.getActionCommand()))
+        {
+            //Open StopWatch application
+        	stepCount.resetSteps();
+        	steps.setText(""+stepCount.getSteps());
+        }
         frame.revalidate();
         frame.repaint();
     }
@@ -50,6 +56,10 @@ public class Driver implements ActionListener
         JButton stopWatch = new JButton("Stopwatch");
         stopWatch.addActionListener(this);
         stopWatch.setActionCommand("stopWatch");
+        
+        JButton resetSteps = new JButton("Reset Steps");
+        resetSteps.addActionListener(this);
+        resetSteps.setActionCommand("resetSteps");
 
         //create JPanel, add buttons and labels, and add a border
         JPanel pane = new JPanel(new GridLayout(0, 1));
@@ -57,6 +67,7 @@ public class Driver implements ActionListener
         pane.add(steps);
         pane.add(setTime);
         pane.add(stopWatch);
+        pane.add(resetSteps);
         pane.setBorder(BorderFactory.createEmptyBorder(
                 30, //top
                 30, //left
@@ -91,7 +102,6 @@ public class Driver implements ActionListener
     public static void runDriver() {
     	//clock = new Clock();
     	//stepCount = new StepCount();
-    	z = 0;
     	Clock.createTimer();
     	createWindow(frame);
         resetWindow();
@@ -99,9 +109,10 @@ public class Driver implements ActionListener
         ActionListener timeAction = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent event) {
-        		z++;
+        		stepCount.incSteps();
+        		
         		time.setText(Clock.getTime());
-        		steps.setText(""+z+"");//stepCount.getSteps());
+        		steps.setText(""+stepCount.getSteps());
         		frame.revalidate();
         		frame.repaint();
         	}

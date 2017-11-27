@@ -1,19 +1,31 @@
 class StepCount
 {
-    private int step_count;
+    private int stepCount;
+    private final int MAXCOUNT = 99999;
 
     public StepCount()
     {
-        step_count = 0;
+        stepCount = 0;
     }
 
     protected int getSteps()
     {
-        return step_count;
+        return stepCount;
     }
 
+    
     protected void setSteps(int new_steps)
     {
-        step_count = new_steps;
+        stepCount = new_steps;
+        if (stepCount > MAXCOUNT) stepCount = stepCount % MAXCOUNT;
+        else if (stepCount < 0) stepCount = 0;
+    }
+    
+    public void resetSteps() {
+    	setSteps(0);
+    }
+    
+    public void incSteps() {
+    	setSteps(stepCount+1);
     }
 }
