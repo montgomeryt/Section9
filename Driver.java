@@ -13,8 +13,6 @@ public class Driver implements ActionListener
 	
     private static JFrame frame = new JFrame("PepStep");
     private static JLabel time = new JLabel();
-
-    private static HeartRate heartRate = new HeartRate();
     private static JLabel hr = new JLabel();
     
     private static JLabel steps = new JLabel();
@@ -48,7 +46,7 @@ public class Driver implements ActionListener
             //Open StopWatch application
         	apps.stepCount.resetSteps();
         	steps.setText("Steps Taken: "+apps.stepCount.getSteps());
-        	hr.setText("Heart Rate: " + heartRate.get_hr());
+        	hr.setText("Heart Rate: " + apps.heartRate.get_hr());
         }
         frame.revalidate();
         frame.repaint();
@@ -101,7 +99,7 @@ public class Driver implements ActionListener
         time.setText("Time: " + apps.clock.getTime());
         //DTC
         steps.setText("Steps Taken: " + apps.stepCount.getSteps());
-        hr.setText("Heart Rate: " + heartRate.get_hr());
+        hr.setText("Heart Rate: " + apps.heartRate.get_hr());
 
         frame.getContentPane().add(main.createComponents());
         frame.revalidate();
@@ -116,12 +114,12 @@ public class Driver implements ActionListener
         ActionListener timeAction = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent event) {
-                Update cmd_update = new Update(heartRate, apps.stepCount);
+                Update cmd_update = new Update(apps.heartRate, apps.stepCount);
                 cmd_update.execute();
 
         		time.setText("Time: " + apps.clock.getTime());
         		steps.setText("Steps Taken: " + apps.stepCount.getSteps());
-        		hr.setText("Heart Rate: " + heartRate.get_hr());
+        		hr.setText("Heart Rate: " + apps.heartRate.get_hr());
         		frame.revalidate();
         		frame.repaint();
         	}

@@ -15,6 +15,10 @@ public class Update implements Command
         this.steps = steps;
     }
 
+    /*
+     * In the final product it would communicate with the hardware for step count and
+     * heart rate. Here heart rate is random for now and steps increment every second
+     */
     public void execute()
     {
         steps.incSteps();

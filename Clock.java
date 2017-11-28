@@ -17,8 +17,8 @@ public class Clock implements ActionListener {
 	private static Clock instance = null;
 	
     private static Timer timer;
-    private int numSeconds = 0;
-    private int numMinutes = 0;
+    private int numSeconds;
+    private int numMinutes;
     private int newMinutes;
     private int newHours;
     private String sTime = "00:00:00";
@@ -27,7 +27,11 @@ public class Clock implements ActionListener {
 
 
     private Clock() {
-    	
+    	numSeconds = 0;
+    	numMinutes = 0;
+    	newMinutes = 0;
+    	newHours = 0;
+    	sTime = "00:00:00";
     }
     /*
      * Only one instance of Clock is ever needed so we use the Singleton pattern

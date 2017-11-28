@@ -6,27 +6,34 @@ import java.util.Random;
 
 class HeartRate
 {
-    private static int heart_rate;
+	private static HeartRate instance = null;
+	
+    private int heart_rate;
 
-    public HeartRate()
+    // private since only one instance
+    private HeartRate()
     {
         heart_rate = 0;
     }
+    public static HeartRate getInstance() {
+    	if (instance == null) instance = new HeartRate();
+    	return instance;
+    }
 
 
-    protected void set_hr_rand()
+    public void set_hr_rand()
     {
         Random rand = new Random();
         int x = rand.nextInt(2) + 85;
         set_hr(x);
     }
 
-    protected int get_hr()
+    public int get_hr()
     {
         return heart_rate;
     }
 
-    protected void set_hr(int new_hr)
+    public void set_hr(int new_hr)
     {
         heart_rate = new_hr;
     }
