@@ -1,4 +1,7 @@
 /**
+ * @author Nicholas Foster
+ * @modified Tyler Montgomery, Dylan Cowden
+ *
  * Clock class
  * Keeps track of time and displays it on the HomeScreen
  * Contains UI which allows the user to update the time

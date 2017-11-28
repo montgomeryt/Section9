@@ -1,3 +1,7 @@
+/**
+ * @author Tyler Montgomery
+ */
+
 public class Sync extends Colleague
 {
     private int hr;

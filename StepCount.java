@@ -1,3 +1,7 @@
+/**
+ * @author Dylan Cowden
+ */
+
 class StepCount
 {
     private int stepCount;

@@ -1,6 +1,6 @@
 /**
- * StopWatch class
- * Contains UI for a stopwatch
+ * @author Nicholas Foster
+ * @modified Tyler Montgomery, Dylan Cowden
  */
 
 //package PepStep;
@@ -69,6 +69,7 @@ public class StopWatch implements ActionListener {
             label.setText(time);
         }
         else {
+            timer.stop();
             Driver.resetWindow();
         }
     }

@@ -1,3 +1,7 @@
+/**
+ * @author Tyler Montgomery
+ */
+
 public class SyncMediator implements Mediator
 {
     private int hr;
