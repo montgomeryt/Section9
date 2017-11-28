@@ -5,7 +5,7 @@
 public class Update implements Command
 {
     private Mediator med = new SyncMediator();
-    private Sync syn = new Sync();
+    private Sync syn = Sync.getInstance();
     private HeartRate hr;
     private StepCount steps;
 

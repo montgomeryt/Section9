@@ -4,9 +4,19 @@
 
 public class Sync extends Colleague
 {
+	private static Sync instance = null;
+	
     private int hr;
     private int steps;
 
+    private Sync() {
+    	hr = 0;
+    	steps = 0;
+    }
+    public static Sync getInstance() {
+    	if (instance == null) instance = new Sync();
+    	return instance;
+    }
     protected void set_hr(int hr)
     {
         this.hr = hr;
