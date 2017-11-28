@@ -134,7 +134,7 @@ public class Clock implements ActionListener {
     /**
      * This method is called by the HomeScreen class when it starts up.
      */
-    protected void createTimer() {
+    public void createTimer() {
         //Updates numMinutes every minute
         ActionListener action = new ActionListener()
         {
@@ -160,11 +160,11 @@ public class Clock implements ActionListener {
         timer.start();
     }
     
-    protected void startTime() {
+    public void startTime() {
     	timer.start();
     }
     
-    protected void stopTime() {
+    public void stopTime() {
     	timer.stop();
     }
     

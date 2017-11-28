@@ -17,12 +17,12 @@ public class Sync extends Colleague
     	if (instance == null) instance = new Sync();
     	return instance;
     }
-    protected void set_hr(int hr)
+    public void set_hr(int hr)
     {
         this.hr = hr;
     }
 
-    protected void set_steps(int steps)
+    public void set_steps(int steps)
     {
         this.steps = steps;
     }

@@ -23,13 +23,13 @@ class StepCount
     }
     
 
-    protected int getSteps()
+    public int getSteps()
     {
         return stepCount;
     }
 
     
-    protected void setSteps(int new_steps)
+    public void setSteps(int new_steps)
     {
         stepCount = new_steps;
         if (stepCount > MAXCOUNT) stepCount = stepCount % MAXCOUNT;

@@ -111,8 +111,6 @@ public class Driver implements ActionListener
     	createWindow(frame);
         resetWindow();
         
-        Update cmd_update;
-        
         ActionListener timeAction = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent event) {
@@ -121,7 +119,7 @@ public class Driver implements ActionListener
         		
                 Update cmd_update = new Update(apps.heartRate.get_hr(),
                 							   apps.stepCount.getSteps());
-                cmd_update.execute();
+                cmd_update.sendInfo();
 
         		time.setText("Time: " + apps.clock.getTime());
         		steps.setText("Steps Taken: " + apps.stepCount.getSteps());

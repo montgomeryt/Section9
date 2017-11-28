@@ -4,18 +4,16 @@
  */
 
 public class AppDelegate {
-	Clock clock;
-	HeartRate heartRate;
-	StepCount stepCount;
-	StopWatch stopWatch;
-	//SyncMediator syncMed;
+	public Clock clock;
+	public HeartRate heartRate;
+	public StepCount stepCount;
+	public StopWatch stopWatch;
 	
 	public AppDelegate() {
 		clock = Clock.getInstance();
 		heartRate = HeartRate.getInstance();
 		stepCount = StepCount.getInstance();
 		stopWatch = StopWatch.getInstance();
-		//syncMed = new SyncMediator();
 	}
 	
 	/* Idea is that final product would have this check the hardware for steps and HR
