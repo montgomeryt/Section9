@@ -9,7 +9,7 @@ public class Sync extends Colleague
     private int hr;
     private int steps;
 
-    private Sync() {
+    public Sync() {
     	hr = 0;
     	steps = 0;
     }
@@ -35,5 +35,15 @@ public class Sync extends Colleague
     public void send_steps()
     {
         System.out.println(steps);
+    }
+
+    public int getHr()
+    {
+        return hr;
+    }
+
+    public int getSteps()
+    {
+        return steps;
     }
 }

@@ -11,7 +11,7 @@ class HeartRate
     private int heart_rate;
 
     // private since only one instance
-    private HeartRate()
+    public HeartRate()
     {
         heart_rate = 0;
     }
