@@ -111,10 +111,16 @@ public class Driver implements ActionListener
     	createWindow(frame);
         resetWindow();
         
+        Update cmd_update;
+        
         ActionListener timeAction = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent event) {
-                Update cmd_update = new Update(apps.heartRate, apps.stepCount);
+        		// for heart rate and step count
+        		apps.checkStepsHeartRate();
+        		
+                Update cmd_update = new Update(apps.heartRate.get_hr(),
+                							   apps.stepCount.getSteps());
                 cmd_update.execute();
 
         		time.setText("Time: " + apps.clock.getTime());

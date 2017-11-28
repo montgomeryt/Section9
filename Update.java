@@ -4,28 +4,27 @@
 
 public class Update implements Command
 {
-    private Mediator med = new SyncMediator();
-    private Sync syn = Sync.getInstance();
-    private HeartRate hr;
-    private StepCount steps;
+    private Mediator med = SyncMediator.getInstance();
+    //new SyncMediator();
+    //private Sync syn = Sync.getInstance();
+    //private HeartRate hr;
+    //private StepCount steps;
+    private int hr;
+    private int steps;
 
-    public Update(HeartRate hr, StepCount steps)
+    public Update(int newHR, int newSteps)
     {
-        this.hr = hr;
-        this.steps = steps;
+        hr = newHR;
+        steps = newSteps;
     }
 
-    /*
-     * In the final product it would communicate with the hardware for step count and
-     * heart rate. Here heart rate is random for now and steps increment every second
-     */
     public void execute()
     {
-        steps.incSteps();
-        hr.set_hr_rand();
+        //steps.incSteps();
+        //hr.set_hr_rand();
 
-        med.update_steps(steps, syn);
-        med.update_hr(hr, syn);
+        med.update_steps(steps);
+        med.update_hr(hr);
 
         // Demonstrates that Sync is updating the hr and steps
         //syn.send_hr();

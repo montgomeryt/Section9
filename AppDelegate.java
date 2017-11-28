@@ -17,4 +17,13 @@ public class AppDelegate {
 		stopWatch = StopWatch.getInstance();
 		//syncMed = new SyncMediator();
 	}
+	
+	/* Idea is that final product would have this check the hardware for steps and HR
+	 * Here heart rate is random and steps increment every second for demonstration purposes
+	 */
+	public void checkStepsHeartRate() {
+		stepCount.incSteps();
+        heartRate.set_hr_rand();
+	}
+	
 }
