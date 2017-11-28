@@ -23,7 +23,7 @@ public class Clock implements ActionListener {
     final static JLabel label = new JLabel("00:00:00");
     final static JLabel labeltmp = new JLabel("00:00:00");
 
-    public Clock() {
+    private Clock() {
         numSeconds = 0;
         newMinutes = 0;
         newHours = 0;

@@ -9,7 +9,7 @@ public class Sync extends Colleague
     private int hr;
     private int steps;
 
-    public Sync() {
+    private Sync() {
     	hr = 0;
     	steps = 0;
     }

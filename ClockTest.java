@@ -13,7 +13,7 @@ public class ClockTest
     @Before
     public void setUp() throws Exception
     {
-        clk = new Clock();
+        clk = Clock.getInstance();
     }
 
     @Test

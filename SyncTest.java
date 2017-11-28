@@ -15,7 +15,7 @@ public class SyncTest
     @Before
     public void setUp() throws Exception
     {
-        syn = new Sync();
+        syn = Sync.getInstance();
         apps = new AppDelegate();
         upd = new Update();
     }
