@@ -1,14 +1,28 @@
+/**
+ * @author Tyler Montgomery
+ */
+
 public class Sync extends Colleague
 {
+	private static Sync instance = null;
+	
     private int hr;
     private int steps;
 
-    protected void set_hr(int hr)
+    private Sync() {
+    	hr = 0;
+    	steps = 0;
+    }
+    public static Sync getInstance() {
+    	if (instance == null) instance = new Sync();
+    	return instance;
+    }
+    public void set_hr(int hr)
     {
         this.hr = hr;
     }
 
-    protected void set_steps(int steps)
+    public void set_steps(int steps)
     {
         this.steps = steps;
     }

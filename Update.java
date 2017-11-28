@@ -1,33 +1,57 @@
-public class Update implements Command
+/**
+ * @author Tyler Montgomery
+ */
+
+public class Update extends Colleague
 {
     private Mediator med;
-    private Sync syn;
-    private HeartRate hr;
-    private StepCount steps;
+    //new SyncMediator();
+    //private Sync syn = Sync.getInstance();
+    //private HeartRate hr;
+    //private StepCount steps;
+    private int hr;
+    private int steps;
 
-    public Update(Mediator med, Sync syn, HeartRate hr, StepCount steps)
-    {
-        this.med = med;
-        this.syn = syn;
-        this.hr = hr;
-        this.steps = steps;
+    public Update() {
+    	hr = 0;
+    	steps = 0;
+    	med = SyncMediator.getInstance();
     }
+    public Update(int newHR, int newSteps)
+    {
+        hr = newHR;
+        steps = newSteps;
+        med = SyncMediator.getInstance();
+    }
+    
+    public void sendInfo() {
+    	send_hr();
+    	send_steps();
+    }
+    
+	@Override
+	public void send_hr() {
+		med.update_hr(hr);
+		
+	}
+	@Override
+	public void send_steps() {
+		med.update_steps(steps);
+		
+	}
+    
+    
 
-    public void execute()
+   /* public void execute()
     {
-        med.update_hr(hr, syn);
-        med.update_steps(steps, syn);
-        syn.send_hr();
-        syn.send_steps();
-    }
+        //steps.incSteps();
+        //hr.set_hr_rand();
 
-    protected void new_hr(int hr)
-    {
-        this.hr.set_hr(hr);
-    }
+        med.update_steps(steps);
+        med.update_hr(hr);
 
-    protected void new_steps(int steps)
-    {
-        this.steps.set_steps(steps);
-    }
+        // Demonstrates that Sync is updating the hr and steps
+        //syn.send_hr();
+        //syn.send_steps();
+    }*/
 }

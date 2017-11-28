@@ -1,18 +1,35 @@
+/**
+ * @author Tyler Montgomery
+ */
+
 public class SyncMediator implements Mediator
 {
     private int hr;
     private int steps;
+    private Sync sync;
+    private static SyncMediator instance = null;
+    
+    private SyncMediator() {
+    	hr = 0;
+    	steps = 0;
+    	sync = Sync.getInstance();
+    }
+    
+    public static SyncMediator getInstance() {
+    	if (instance == null) instance = new SyncMediator();
+    	return instance;
+    }
 
-    public void update_hr(HeartRate hr, Sync sync)
+    public void update_hr(int newHR)
     {
-        this.hr = hr.get_hr();
-        sync.set_hr(this.hr);
+        hr = newHR;
+        sync.set_hr(hr);
 
     }
 
-    public void update_steps(StepCount s, Sync sync)
+    public void update_steps(int s)
     {
-        this.steps = s.get_steps();
-        sync.set_steps(this.steps);
+        steps = s;
+        sync.set_steps(steps);
     }
 }

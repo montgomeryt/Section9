@@ -1,19 +1,46 @@
+/**
+ * @author Dylan Cowden
+ */
+
 class StepCount
 {
-    private int step_count;
+	//for Singleton
+	private static StepCount instance = null;
+	
+	private int stepCount;
+    private final int MAXCOUNT = 99999;
 
-    public StepCount()
+    private StepCount()
     {
-        step_count = 0;
+        stepCount = 0;
+    }
+    /*
+     * Only one instance of StepCount is ever needed so we use the Singleton pattern
+     */
+    public static StepCount getInstance() {
+    	if(instance == null) instance = new StepCount();
+    	return instance;
+    }
+    
+
+    public int getSteps()
+    {
+        return stepCount;
     }
 
-    protected int get_steps()
+    
+    public void setSteps(int new_steps)
     {
-        return step_count;
+        stepCount = new_steps;
+        if (stepCount > MAXCOUNT) stepCount = stepCount % MAXCOUNT;
+        else if (stepCount < 0) stepCount = 0;
     }
-
-    protected void set_steps(int new_steps)
-    {
-        step_count = new_steps;
+    
+    public void resetSteps() {
+    	setSteps(0);
+    }
+    
+    public void incSteps() {
+    	setSteps(stepCount+1);
     }
 }
