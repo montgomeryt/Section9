@@ -30,17 +30,17 @@ public class Driver implements ActionListener
         if ("setTime".equals(e.getActionCommand()))
         {
             //Opens Clock UI which allows the time to be updated
-        	Clock.stopTime();
+        	apps.clock.stopTime();
             frame.getContentPane().removeAll();
-            time.setText("Time: " + Clock.getTime());
+            time.setText("Time: " + apps.clock.getTime());
             frame.getContentPane().add(apps.clock.createComponents());
-            Clock.startTime();
+            apps.clock.startTime();
         }
         else if ("stopWatch".equals(e.getActionCommand()))
         {
             //Open StopWatch application
             frame.getContentPane().removeAll();
-            StopWatch.createAndShowGUI();
+            apps.stopWatch.createAndShowGUI();
             frame.getContentPane().add(apps.stopWatch.createComponents());
         }
         else if ("resetSteps".equals(e.getActionCommand()))
@@ -98,7 +98,7 @@ public class Driver implements ActionListener
     {
         frame.getContentPane().removeAll();
         Driver main = new Driver();
-        time.setText("Time: " + Clock.getTime());
+        time.setText("Time: " + apps.clock.getTime());
         //DTC
         steps.setText("Steps Taken: " + apps.stepCount.getSteps());
         hr.setText("Heart Rate: " + heartRate.get_hr());
@@ -109,7 +109,7 @@ public class Driver implements ActionListener
     }
     
     public static void runDriver() {
-    	Clock.createTimer();
+    	apps.clock.createTimer();
     	createWindow(frame);
         resetWindow();
         
@@ -119,7 +119,7 @@ public class Driver implements ActionListener
                 Update cmd_update = new Update(heartRate, apps.stepCount);
                 cmd_update.execute();
 
-        		time.setText("Time: " + Clock.getTime());
+        		time.setText("Time: " + apps.clock.getTime());
         		steps.setText("Steps Taken: " + apps.stepCount.getSteps());
         		hr.setText("Heart Rate: " + heartRate.get_hr());
         		frame.revalidate();

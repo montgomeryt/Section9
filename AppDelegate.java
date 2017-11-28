@@ -10,18 +10,18 @@ public class AppDelegate {
 	StopWatch stopWatch;
 	
 	public AppDelegate() {
-		clock = new Clock();
+		clock = Clock.getInstance();
 		heartRate = new HeartRate();
-		stepCount = new StepCount();
+		stepCount = StepCount.getInstance();
 		syncMed = new SyncMediator();
-		stopWatch = new StopWatch();
+		stopWatch = StopWatch.getInstance();
 	}
 	
 	/* Final product would have a pedometer	<-----Delete method
 	 * Here a step is taken every second
 	 */
-	private void pedCommunication() {
-		int j = clock.getRawTime();
-		stepCount.setSteps(j);
-	}
+	//private void pedCommunication() {
+	//	int j = clock.getRawTime();
+	//	stepCount.setSteps(j);
+	//}
 }

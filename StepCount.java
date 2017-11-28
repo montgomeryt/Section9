@@ -4,13 +4,24 @@
 
 class StepCount
 {
-    private int stepCount;
+	//for Singleton
+	private static StepCount instance = null;
+	
+	private int stepCount;
     private final int MAXCOUNT = 99999;
 
-    public StepCount()
+    private StepCount()
     {
         stepCount = 0;
     }
+    /*
+     * Only one instance of StepCount is ever needed so we use the Singleton pattern
+     */
+    public static StepCount getInstance() {
+    	if(instance == null) instance = new StepCount();
+    	return instance;
+    }
+    
 
     protected int getSteps()
     {

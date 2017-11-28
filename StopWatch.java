@@ -10,6 +10,10 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class StopWatch implements ActionListener {
+	
+	//For Singleton pattern
+	private static StopWatch instance = null;
+	
     private static Timer timer;
     private static int seconds = 0;
     private static int minutes = 0;
@@ -17,6 +21,17 @@ public class StopWatch implements ActionListener {
     final static JLabel label = new JLabel();
     private static String time;
 
+    private StopWatch() {
+    	
+    }
+    /*
+     * Only one instance of Clock is ever needed so we use the Singleton pattern
+     */
+    public static StopWatch getInstance() {
+    	if(instance == null) instance = new StopWatch();
+    	return instance;
+    }
+    
     public Component createComponents() {
         //make buttons
         JButton start = new JButton("Start Timer");
@@ -74,7 +89,8 @@ public class StopWatch implements ActionListener {
         }
     }
 
-    public static void createAndShowGUI() {
+    //public static void 
+    public void createAndShowGUI() {
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         time = String.format("%02d:%02d:%02d", hours, minutes, seconds);
         label.setText(time);

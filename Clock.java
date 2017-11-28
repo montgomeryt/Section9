@@ -13,31 +13,40 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Clock implements ActionListener {
+	
+	private static Clock instance = null;
+	
     private static Timer timer;
-    private static int numSeconds = 0;
-    private static int numMinutes = 0;
-    private static int newMinutes;
-    private static int newHours;
-    private static String sTime = "00:00:00";
+    private int numSeconds = 0;
+    private int numMinutes = 0;
+    private int newMinutes;
+    private int newHours;
+    private String sTime = "00:00:00";
     final static JLabel label = new JLabel("00:00:00");
     final static JLabel labeltmp = new JLabel("00:00:00");
 
 
+    private Clock() {
+    	
+    }
+    /*
+     * Only one instance of Clock is ever needed so we use the Singleton pattern
+     */
+    public static Clock getInstance() {
+    	if(instance == null) instance = new Clock();
+    	return instance;
+    }
+    
     /**
      * A method called by HomeScreen: Formats the current time to a String, then returns it
      * @return String time
      */
-    public static String getTime(){
+    public String getTime(){
         /*int hours = numSeconds / 60 / 60;
         int minutes = numSeconds /60 % 60;
         int seconds = numSeconds % 60;
         String time = String.format("%02d:%02d:%02d", hours, minutes, seconds);*/
         return sTime;
-    }
-    
-    //added by dylan
-    public int getRawTime() {
-    	return numMinutes;
     }
 
     public Component createComponents() {
@@ -121,7 +130,7 @@ public class Clock implements ActionListener {
     /**
      * This method is called by the HomeScreen class when it starts up.
      */
-    static void createTimer() {
+    protected void createTimer() {
         //Updates numMinutes every minute
         ActionListener action = new ActionListener()
         {
@@ -147,12 +156,13 @@ public class Clock implements ActionListener {
         timer.start();
     }
     
-    static void startTime() {
+    protected void startTime() {
     	timer.start();
     }
     
-    static void stopTime() {
+    protected void stopTime() {
     	timer.stop();
     }
+    
     
 }
