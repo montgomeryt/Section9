@@ -28,25 +28,27 @@ public class Driver implements ActionListener
         if ("setTime".equals(e.getActionCommand()))
         {
             //Opens Clock UI which allows the time to be updated
-        	apps.clock.stopTime();
+        	apps.stopClockTime();//h
             frame.getContentPane().removeAll();
             time.setText("Time: " + apps.clock.getTime());
-            frame.getContentPane().add(apps.clock.createComponents());
-            apps.clock.startTime();
+            //frame.getContentPane().add(apps.clock.createComponents());
+            frame.getContentPane().add(apps.clockCreate());
+            apps.startClockTime();
         }
         else if ("stopWatch".equals(e.getActionCommand()))
         {
             //Open StopWatch application
             frame.getContentPane().removeAll();
-            apps.stopWatch.createAndShowGUI();
-            frame.getContentPane().add(apps.stopWatch.createComponents());
+            apps.setupStopWatch();
+            //frame.getContentPane().add(apps.stopWatch.createComponents());
+            frame.getContentPane().add(apps.stopWatchCreate());
         }
         else if ("resetSteps".equals(e.getActionCommand()))
         {
             //Open StopWatch application
-        	apps.stepCount.resetSteps();
-        	steps.setText("Steps Taken: "+apps.stepCount.getSteps());
-        	hr.setText("Heart Rate: " + apps.heartRate.get_hr());
+        	apps.resetSteps();
+        	steps.setText("Steps Taken: "+apps.getSteps());
+        	hr.setText("Heart Rate: " + apps.getHR());
         }
         frame.revalidate();
         frame.repaint();
@@ -96,10 +98,10 @@ public class Driver implements ActionListener
     {
         frame.getContentPane().removeAll();
         Driver main = new Driver();
-        time.setText("Time: " + apps.clock.getTime());
+        time.setText("Time: " + apps.clockGetTime());
         //DTC
-        steps.setText("Steps Taken: " + apps.stepCount.getSteps());
-        hr.setText("Heart Rate: " + apps.heartRate.get_hr());
+        steps.setText("Steps Taken: " + apps.getSteps());
+        hr.setText("Heart Rate: " + apps.getHR());
 
         frame.getContentPane().add(main.createComponents());
         frame.revalidate();
@@ -107,7 +109,7 @@ public class Driver implements ActionListener
     }
     
     public static void runDriver() {
-    	apps.clock.createTimer();
+    	apps.clockTimer();
     	createWindow(frame);
         resetWindow();
         
@@ -117,13 +119,13 @@ public class Driver implements ActionListener
         		// for heart rate and step count
         		apps.checkStepsHeartRate();
         		
-                Update cmd_update = new Update(apps.heartRate.get_hr(),
-                							   apps.stepCount.getSteps());
+                Update cmd_update = new Update(apps.getHR(),
+                							   apps.getSteps());
                 cmd_update.sendInfo();
 
-        		time.setText("Time: " + apps.clock.getTime());
-        		steps.setText("Steps Taken: " + apps.stepCount.getSteps());
-        		hr.setText("Heart Rate: " + apps.heartRate.get_hr());
+        		time.setText("Time: " + apps.clockGetTime());
+        		steps.setText("Steps Taken: " + apps.getSteps());
+        		hr.setText("Heart Rate: " + apps.getHR());
         		frame.revalidate();
         		frame.repaint();
         	}

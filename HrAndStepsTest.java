@@ -20,13 +20,13 @@ public class HrAndStepsTest
     public void testSetHR()
     {
         apps.heartRate.set_hr(83);
-        assertEquals(83, apps.heartRate.get_hr());
+        assertEquals(83, apps.getHR());
     }
 
     @Test
     public void testSetSteps()
     {
-        apps.stepCount.setSteps(10);
-        assertEquals(10, apps.stepCount.getSteps());
+        apps.setSteps(10);
+        assertEquals(10, apps.getSteps());
     }
 }
