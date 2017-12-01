@@ -4,7 +4,7 @@
 
 public class Update extends Colleague
 {
-    private Mediator med;
+    public Mediator med;
     //new SyncMediator();
     //private Sync syn = Sync.getInstance();
     //private HeartRate hr;
@@ -27,6 +27,14 @@ public class Update extends Colleague
     public void sendInfo() {
     	send_hr();
     	send_steps();
+    }
+    
+    public void set_hr(int h) {
+    	hr = h;
+    }
+    
+    public void set_steps(int s) {
+    	steps = s;
     }
     
 	@Override

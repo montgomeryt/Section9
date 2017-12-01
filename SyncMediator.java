@@ -4,9 +4,10 @@
 
 public class SyncMediator implements Mediator
 {
-    private int hr;
-    private int steps;
-    private Sync sync;
+    public int hr;
+    public int steps;
+    //private junit purpose
+    public Sync sync;
     private static SyncMediator instance = null;
     
     private SyncMediator() {
@@ -32,4 +33,14 @@ public class SyncMediator implements Mediator
         steps = s;
         sync.set_steps(steps);
     }
+
+	@Override
+	public int get_hr() {
+		return hr;
+	}
+
+	@Override
+	public int get_s() {
+		return steps;
+	}
 }
