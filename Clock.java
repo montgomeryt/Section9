@@ -42,15 +42,16 @@ public class Clock implements ActionListener {
      * @return String time
      */
     public String getTime(){
-        String time = String.format("%02d:%02d:%02d",
-                numSeconds/60/60, numSeconds/60%60, numSeconds%60);
+        //String time = String.format("%02d:%02d:%02d",
+                //numSeconds/60/60, numSeconds/60%60, numSeconds%60);
         //return sTime;
-        return time;
+        return sTime;
     }
 
     public Component createComponents() {
         //Create buttons
-        labeltmp.setText(sTime);
+    	
+        labeltmp.setText(sTime.substring(0, 5));
         JButton addMinute = new JButton("+Minute");
         addMinute.addActionListener(this);
         addMinute.setActionCommand("am");
@@ -91,7 +92,8 @@ public class Clock implements ActionListener {
      * @postconditions after enter selected time is set at 0 seconds
      */
     public void actionPerformed(ActionEvent e) {
-        String time;
+        String time;// = String.format("%02d:%02d", numSeconds/60/60, numSeconds/60%60);
+        //labeltmp.setText(time);;
         if ("am".equals(e.getActionCommand())) { //Add a minute
             newMinutes++;
             if (newMinutes >= 60)
@@ -119,10 +121,11 @@ public class Clock implements ActionListener {
         } else if ("enter".equals(e.getActionCommand())) { //Submit changes, update numMinutes, and restart timer
             numSeconds = (60*newHours + newMinutes) * 60;
 
-            timer.restart();
+            
             sTime =  String.format("%02d:%02d:%02d",
                     numSeconds/60/60, numSeconds/60%60, numSeconds%60);
-            label.setText(sTime);
+            label.setText(getTime());//sTime);
+            timer.restart();
             Driver.resetWindow();
         }
     }
@@ -143,7 +146,7 @@ public class Clock implements ActionListener {
                 if (numSeconds == 86400)
                     numSeconds = 0;
                 sTime = String.format("%02d:%02d:%02d",
-                        numSeconds/60/60, numSeconds/60%60);
+                        numSeconds/60/60, numSeconds/60%60,numSeconds%60);
             }
         };
         //Timer set to act every minute

@@ -36,6 +36,8 @@ public class ClockTest
      * ah - add hour
      * sh - subtract hour
      * enter - submit time
+     * 
+     * Thorough test of setting time
      */
     @Test
     public void clockSetTime() {
@@ -48,7 +50,29 @@ public class ClockTest
     	ActionEvent e = new ActionEvent(new Object(), 0, "enter");
     	
     	clk.actionPerformed(am);
+    	clk.actionPerformed(ah);
     	clk.actionPerformed(e);
-    	assertEquals("00:01:00", clk.getTime());
+    	assertEquals("01:01", clk.getTime().substring(0, 5));
+    	
+    	// +1 hour and -2 minute total. end result should be 2:59
+    	clk.actionPerformed(sh);
+    	clk.actionPerformed(ah);
+    	clk.actionPerformed(ah);
+    	clk.actionPerformed(sm);
+    	clk.actionPerformed(sm);
+    	clk.actionPerformed(am);
+    	clk.actionPerformed(sm);
+    	clk.actionPerformed(e);
+    	assertEquals("02:59",clk.getTime().substring(0, 5));
+    	
+    	//hours loop 24 should give same result
+    	for (int i = 0; i < 24; i++) clk.actionPerformed(ah);
+    	clk.actionPerformed(e);
+    	assertEquals("02:59",clk.getTime().substring(0, 5));
+    	
+    	//minute loop same
+    	for (int i = 0; i < 60; i++) clk.actionPerformed(am);
+    	clk.actionPerformed(e);
+    	assertEquals("02:59",clk.getTime().substring(0, 5));
     }
 }
