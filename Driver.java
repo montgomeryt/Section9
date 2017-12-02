@@ -1,3 +1,4 @@
+package com.csci360.healthmonitor.pepstep;
 /**
  * @author Tyler Montgomery, Nicholas Foster, Dylan Cowden
  */
@@ -17,35 +18,33 @@ public class Driver implements ActionListener
     
     private static JLabel steps = new JLabel();
     private static AppDelegate apps = new AppDelegate();
-    //private static Clock clock = new Clock();
-    //private static StepCount stepCount = new StepCount();
     
+    /*
+     * actions for each button and what happens when pressed
+     */
     public void actionPerformed(ActionEvent e)
     {
-        //Clock clock = new Clock();
-        
-        //StopWatch stopWatch = new StopWatch();
         if ("setTime".equals(e.getActionCommand()))
-        {
-            //Opens Clock UI which allows the time to be updated
-        	apps.stopClockTime();//h
+        {//Opens Clock UI which allows the time to be updated
+            
+        	apps.stopClockTime();
             frame.getContentPane().removeAll();
-            time.setText("Time: " + apps.clock.getTime());
+            time.setText("Time: " + apps.clockGetTime());
             //frame.getContentPane().add(apps.clock.createComponents());
             frame.getContentPane().add(apps.clockCreate());
             apps.startClockTime();
         }
         else if ("stopWatch".equals(e.getActionCommand()))
-        {
-            //Open StopWatch application
+        {//Open StopWatch application
+            
             frame.getContentPane().removeAll();
             apps.setupStopWatch();
             //frame.getContentPane().add(apps.stopWatch.createComponents());
             frame.getContentPane().add(apps.stopWatchCreate());
         }
         else if ("resetSteps".equals(e.getActionCommand()))
-        {
-            //Open StopWatch application
+        {//Open StopWatch application
+            
         	apps.resetSteps();
         	steps.setText("Steps Taken: "+apps.getSteps());
         	hr.setText("Heart Rate: " + apps.getHR());
@@ -53,6 +52,11 @@ public class Driver implements ActionListener
         frame.revalidate();
         frame.repaint();
     }
+    
+    /*
+     * Creates the parts to be displayed for access to setting time, stop watch, and resetting steps
+     * note that these are place holders most likely for physical analog buttons
+     */
     private Component createComponents()
     {
         //make buttons
@@ -85,6 +89,9 @@ public class Driver implements ActionListener
         return pane;
     }
 
+    /* 
+     * makes swing screen
+     */
     private static void createWindow(JFrame frame)
     {
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -92,8 +99,12 @@ public class Driver implements ActionListener
         frame.setLocationRelativeTo(null);
         frame.setLocation((int)((dimension.getWidth() - frame.getWidth()) / 2), (int)(dimension.getHeight() - frame.getHeight()) / 2);
         frame.setVisible(true);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
+    /*
+     * For displaying the main screen. Called at beginning and when exiting other screens
+     */
     public static void resetWindow()
     {
         frame.getContentPane().removeAll();
@@ -108,6 +119,9 @@ public class Driver implements ActionListener
         frame.repaint();
     }
     
+    /* Function that creates the UI and get the apps ready to run. Once UI is made starts a timer for repainting and checking input
+     * 
+     */
     public static void runDriver() {
     	apps.clockTimer();
     	createWindow(frame);
@@ -116,12 +130,10 @@ public class Driver implements ActionListener
         ActionListener timeAction = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent event) {
-        		// for heart rate and step count
+        		// for heart rate and step count to update
         		apps.checkStepsHeartRate();
         		
-                Update cmd_update = new Update(apps.getHR(),
-                							   apps.getSteps());
-                cmd_update.sendInfo();
+        		apps.updateInfo();
 
         		time.setText("Time: " + apps.clockGetTime());
         		steps.setText("Steps Taken: " + apps.getSteps());

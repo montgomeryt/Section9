@@ -1,5 +1,7 @@
+package com.csci360.healthmonitor.pepstep;
 /**
- * @author Tyler Montgomery
+ * @author Tyler Montgomery, Dylan Cowden
+ * This is the mediator for the mediator pattern to be implemented by SyncMediator
  */
 
 public interface Mediator

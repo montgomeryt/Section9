@@ -1,5 +1,6 @@
+package com.csci360.healthmonitor.pepstep;
 /**
- * @author Tyler Montgomery
+ * @author Tyler Montgomery, Dylan Cowden
  */
 
 import java.util.Random;

@@ -1,5 +1,8 @@
+package com.csci360.healthmonitor.pepstep;
 /**
- * @author Tyler Montgomery
+ * @author Tyler Montgomery, Dylan Cowden
+ * This would be where we added a way for communication with external device. 
+ * Is colleague of Update and is mediated by SyncMediator
  */
 
 public class Sync extends Colleague
@@ -28,11 +31,13 @@ public class Sync extends Colleague
         this.steps = steps;
     }
 
+    // Would be to device
     public void send_hr()
     {
         System.out.println(hr);
     }
 
+    //Meant to be sent to device
     public void send_steps()
     {
         System.out.println(steps);

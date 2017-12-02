@@ -1,3 +1,4 @@
+package com.csci360.healthmonitor.pepstep;
 /**
  * @author Nicholas Foster
  * @modified Tyler Montgomery, Dylan Cowden
@@ -48,6 +49,9 @@ public class Clock implements ActionListener {
         return sTime;
     }
 
+    /*
+     * UI for setting time
+     */
     public Component createComponents() {
         //Create buttons
     	
@@ -92,8 +96,7 @@ public class Clock implements ActionListener {
      * @postconditions after enter selected time is set at 0 seconds
      */
     public void actionPerformed(ActionEvent e) {
-        String time;// = String.format("%02d:%02d", numSeconds/60/60, numSeconds/60%60);
-        //labeltmp.setText(time);;
+        String time;
         if ("am".equals(e.getActionCommand())) { //Add a minute
             newMinutes++;
             if (newMinutes >= 60)
@@ -124,18 +127,20 @@ public class Clock implements ActionListener {
             
             sTime =  String.format("%02d:%02d:%02d",
                     numSeconds/60/60, numSeconds/60%60, numSeconds%60);
-            label.setText(getTime());//sTime);
+            label.setText(getTime());
             timer.restart();
             Driver.resetWindow();
         }
     }
 
     /**
-     * This method is called by the HomeScreen class when it starts up. It creates the 
+     * This method is called by the HomeScreen thru the appDelegateclass when it starts up. It creates the 
      * timer that keeps time
      */
     public void createTimer() {
         //Updates numMinutes every minute
+    	sTime = "00:00:00";
+    	numSeconds = 0;
         ActionListener action = new ActionListener()
         {
             @Override

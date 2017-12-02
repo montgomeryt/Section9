@@ -1,6 +1,9 @@
+package com.csci360.healthmonitor.pepstep;
 /**
  * @author Nicholas Foster
  * @modified Tyler Montgomery, Dylan Cowden
+ * Class for StopWatch. keeps time and can be paused. 
+ * Pauses automatically at max time and switching apps
  */
 
 //package PepStep;
@@ -14,10 +17,10 @@ public class StopWatch implements ActionListener {
 	//For Singleton pattern
 	private static StopWatch instance = null;
 	
-    private static Timer timer;
-    private static int seconds = 0;
-    private static int minutes = 0;
-    private static int hours = 0;
+    private Timer timer;
+    private int seconds = 0;
+    private int minutes = 0;
+    private int hours = 0;
     final static JLabel label = new JLabel();
     private static String time;
 
@@ -73,7 +76,7 @@ public class StopWatch implements ActionListener {
             timer.start();
         else if ("pause".equals(e.getActionCommand()))
             //If pause button is clicked, pause timer
-            timer.stop();
+            pause();
         else if ("reset".equals(e.getActionCommand())){
             //If reset button is clicked, pause timer, reset h/m/s and update display
             timer.stop();
@@ -89,7 +92,9 @@ public class StopWatch implements ActionListener {
         }
     }
 
-    //public static void 
+    /*
+     * Create what is needed for UI associated with stopwatch. also creates timer
+     */
     public void createAndShowGUI() {
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         time = String.format("%02d:%02d:%02d", hours, minutes, seconds);
@@ -127,5 +132,38 @@ public class StopWatch implements ActionListener {
         timer = new Timer(1000, action);
         timer.setInitialDelay(0);
 
+    }
+    
+    public int getSec() {
+    	return seconds;
+    }
+    
+    public int getMin() {
+    	return minutes;
+    }
+    
+    public int getHour() {
+    	return hours;
+    }
+    
+    public void pause() {
+    	timer.stop();
+    }
+    
+    // for testing purposes only
+    public void startTimer() {
+    	timer.start();
+    }
+    // for testing purposes only
+    public void stopTimer() {
+    	timer.stop();
+    }
+    
+    public void reset() {
+        seconds = 0;
+        minutes = 0;
+        hours = 0;
+        time = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+        label.setText(time);
     }
 }

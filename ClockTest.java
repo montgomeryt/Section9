@@ -1,5 +1,6 @@
+package com.csci360.healthmonitor.test;
 /**
- * Created by Tyler Montgomery
+ * @author Tyler Montgomery, Nicholas Foster, Dylan Cowden
  */
 
 import static org.junit.Assert.*;
@@ -11,6 +12,8 @@ import javax.swing.JButton;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.csci360.healthmonitor.pepstep.Clock;
+
 public class ClockTest
 {
     private Clock clk;
@@ -21,6 +24,7 @@ public class ClockTest
         clk = Clock.getInstance();
     }
 
+    //checks to see if creating the clock timer defaults the value
     @Test
     public void testCreateTimer()
     {

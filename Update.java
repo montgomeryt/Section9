@@ -1,33 +1,49 @@
+package com.csci360.healthmonitor.pepstep;
 /**
- * @author Tyler Montgomery
+ * @author Tyler Montgomery, Nicholas Foster, Dylan Cowden
+ * is a colleague that communicates with Sync
  */
 
 public class Update extends Colleague
 {
-    public Mediator med;
-    //new SyncMediator();
-    //private Sync syn = Sync.getInstance();
-    //private HeartRate hr;
-    //private StepCount steps;
+    private static Update instance = null;
+    private Mediator med;
     private int hr;
     private int steps;
 
-    public Update() {
+    private Update() {
     	hr = 0;
     	steps = 0;
     	med = SyncMediator.getInstance();
     }
-    public Update(int newHR, int newSteps)
-    {
-        hr = newHR;
-        steps = newSteps;
-        med = SyncMediator.getInstance();
+    
+    //Singleton
+    public static Update getInstance() {
+    	if(instance == null) instance = new Update();
+    	return instance;
     }
     
+    //sends both heart rate and steps to Sync thru mediator
     public void sendInfo() {
     	send_hr();
     	send_steps();
     }
+    
+    public void set_info(int h, int s) {
+    	set_hr(h);
+    	set_steps(s);
+    }
+    
+	@Override
+	public void send_hr() {
+		med.update_hr(hr);
+		
+	}
+	@Override
+	public void send_steps() {
+		med.update_steps(steps);
+		
+	}
     
     public void set_hr(int h) {
     	hr = h;
@@ -44,30 +60,4 @@ public class Update extends Colleague
     public int getSyncHR() {
     	return med.getHR();
     }
-    
-	@Override
-	public void send_hr() {
-		med.update_hr(hr);
-		
-	}
-	@Override
-	public void send_steps() {
-		med.update_steps(steps);
-		
-	}
-    
-    
-
-   /* public void execute()
-    {
-        //steps.incSteps();
-        //hr.set_hr_rand();
-
-        med.update_steps(steps);
-        med.update_hr(hr);
-
-        // Demonstrates that Sync is updating the hr and steps
-        //syn.send_hr();
-        //syn.send_steps();
-    }*/
 }

@@ -1,10 +1,14 @@
+package com.csci360.healthmonitor.test;
 /**
- * Created by Tyler Montgomery
+ * @author Tyler Montgomery, Nicholas Foster, Dylan Cowden
  */
 
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.csci360.healthmonitor.pepstep.Sync;
+import com.csci360.healthmonitor.pepstep.Update;
 
 public class SyncTest
 {
@@ -14,8 +18,12 @@ public class SyncTest
     @Before
     public void setUp() throws Exception
     {
-        upd = new Update();
+        upd = Update.getInstance();
     }
+    
+    /*
+     * Test to see if sync receives updates thru the Update object
+     */
     @Test
     public void testSyncHR()
     {
@@ -23,6 +31,7 @@ public class SyncTest
     	upd.send_hr();
         assertEquals(83, upd.getSyncHR());
     }
+    
     @Test
     public void testSyncSteps()
     {
@@ -31,6 +40,11 @@ public class SyncTest
         assertEquals(10,upd.getSyncSteps());
     }
     
+    /*
+     * This is a test to make sure the Singleton pattern was correctly implemented.
+     * Should mean grabbing an instance of sync after update has sent info thru mediator
+     * results in having the only sync object
+     */
     @Test
     public void testSyncSingleton() {
     	upd.set_steps(10);
