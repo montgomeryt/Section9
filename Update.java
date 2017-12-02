@@ -37,6 +37,14 @@ public class Update extends Colleague
     	steps = s;
     }
     
+    public int getSyncSteps() {
+    	return med.getSteps();
+    }
+    
+    public int getSyncHR() {
+    	return med.getHR();
+    }
+    
 	@Override
 	public void send_hr() {
 		med.update_hr(hr);

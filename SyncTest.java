@@ -9,46 +9,51 @@ import org.junit.Test;
 public class SyncTest
 {
     private Sync syn;
-    private AppDelegate apps;
+    //private AppDelegate apps;
     private Update upd;
 
     @Before
     public void setUp() throws Exception
     {
         //syn = Sync.getInstance();
-        apps = new AppDelegate();
+        //apps = new AppDelegate();
         upd = new Update();
     }
-
     @Test
-    public void testSetHR()
-    {
-        apps.heartRate.set_hr(83);
-        assertEquals(83, apps.heartRate.get_hr());
-    }
-
-    @Test
-    public void testSetSteps()
-    {
-        apps.stepCount.setSteps(10);
-        assertEquals(10, apps.stepCount.getSteps());
-    }
-
-    @Test
-    public void testSyncSteps()
+    public void testSyncHR()
     {
     	upd.set_hr(83);
     	upd.send_hr();//.set_hr(83);
-    	syn = Sync.getInstance();
-        assertEquals(83, upd.med.get_s());
+    	//syn = Sync.getInstance();
+        assertEquals(83, upd.getSyncHR());
     }
     @Test
-    public void testSyncHr()
+    public void testSyncSteps()
     {
         upd.set_steps(10);
         upd.send_steps();
+        assertEquals(10,upd.getSyncSteps());
         //syn = Sync.getInstance();
-        assertEquals(10, upd.med.get_hr());//syn.getSteps());
+        //System.out.println(syn.getHr());
+        //assertEquals(10,syn.getHr());
+        //syn.send_hr();
+        //assertEquals(10, upd.getSyncHR());//syn.getSteps());
+    }
+    
+    /*
+     * Wanted to show a test proving the singleton instance grabbed is the same from
+     * object to object. Since same pattern was applied to all Singleton, this is meant
+     * to show they all function correctly. It also counts on the above tests for proof
+     */
+    
+    @Test
+    public void testSyncSingleton() {
+    	upd.set_steps(10);
+        upd.send_steps();
+        assertEquals(10,upd.getSyncSteps());
+        upd.set_hr(83);
+    	upd.send_hr();
+        assertEquals(83, upd.getSyncHR());
     }
 
 }

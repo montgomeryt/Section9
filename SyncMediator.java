@@ -35,12 +35,15 @@ public class SyncMediator implements Mediator
     }
 
 	@Override
-	public int get_hr() {
-		return hr;
+	/*
+	 * Gets heart rate from sync
+	 */
+	public int getHR() {
+		return sync.getHr();//hr;
 	}
 
 	@Override
-	public int get_s() {
-		return steps;
+	public int getSteps() {
+		return sync.getSteps();//steps;
 	}
 }
