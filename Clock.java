@@ -87,6 +87,8 @@ public class Clock implements ActionListener {
 
     /**
      * Perform an action when a button is pressed
+     * 
+     * @postconditions after enter selected time is set at 0 seconds
      */
     public void actionPerformed(ActionEvent e) {
         String time;
@@ -126,7 +128,8 @@ public class Clock implements ActionListener {
     }
 
     /**
-     * This method is called by the HomeScreen class when it starts up.
+     * This method is called by the HomeScreen class when it starts up. It creates the 
+     * timer that keeps time
      */
     public void createTimer() {
         //Updates numMinutes every minute
@@ -136,11 +139,10 @@ public class Clock implements ActionListener {
             public void actionPerformed(ActionEvent event)
             {
                 numSeconds++;
-                //timeS++;
                 //Clock reaches 23:59 and resets to simulate a new day
                 if (numSeconds == 86400)
                     numSeconds = 0;
-                sTime = String.format("%02d:%02d",
+                sTime = String.format("%02d:%02d:%02d",
                         numSeconds/60/60, numSeconds/60%60);
             }
         };
